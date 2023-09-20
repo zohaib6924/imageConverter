@@ -2,7 +2,7 @@ import './assets/css/index.css'
 import { Route, Routes } from 'react-router-dom'
 import UserUploadImage from '../views/UserUploadImage'
 import PerformConversions from '../views/PerformConversions'
-import DownloadImage from '../views/DownloadImage'
+import DownloadImageComponent from '../views/DownloadImageComponent'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={<UserUploadImage />} />
         <Route path='/edit-image' element={< PerformConversions />} />
-        <Route path='/download' element={<DownloadImage />} />
+        <Route path='/download' element={<DownloadImageComponent />} />
       </Routes>
     </>
   )
