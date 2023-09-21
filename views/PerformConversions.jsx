@@ -1,11 +1,13 @@
 import React, { useState, createRef, useEffect } from "react";
-import { Container, Row, Col, Tab, Tabs,Button } from 'react-bootstrap';
+import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import StyleFields from '../components/reuseable/StyleFields';
 import { Cropper } from "react-cropper";
-import { Link } from "react-router-dom";
 import "cropperjs/dist/cropper.css";
 import Modal from 'react-bootstrap/Modal';
-
+import Button from '../components/reuseable/Button'
+import { RiDownloadCloudLine } from 'react-icons/ri'
+import SelectMenu from "../view/components/SelectMenu";
+import { svgIcon } from "../view/constant/svg/icons";
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
 
@@ -125,12 +127,14 @@ const PerformConversions = () => {
     <>
       <Container className="font-style">
         <h4 className='my-3'>Perform Conversions :</h4>
+        <Button class={'render-btn'} data={'Render Image'} onClick={handleShow}></Button>
         <Tabs
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}
           className="my-4 border-0 tab-style gy-5"
         >
+
           <Tab eventKey="Crop" title="Crop">
             <Row className='justify-content-between'>
               <Col lg={7}>
@@ -147,28 +151,31 @@ const PerformConversions = () => {
                   guides={true}
                   crop={onCropChange}
                 />
-
+                <Button class={'show-btn'} data={'Render Image'} onClick={handleShow}></Button>
               </Col>
               <Col className='border-line font-style' lg={3}>
                 <div className='p-5'>
                   <h2>Crop Image</h2>
-                  <div className='mb-2'>
-                    <label htmlFor="">Height</label>
-                    <StyleFields value={limitNumberToNDigits(cropperData.height, 3)} />
+                  <div className="row">
+                    <div className='mb-2 col-lg-12 col-sm-6'>
+                      <label htmlFor="">Height</label>
+                      <StyleFields value={limitNumberToNDigits(cropperData.height, 3)} />
 
+                    </div>
+                    <div className='mb-2  col-lg-12 col-sm-6'>
+                      <label htmlFor="">Width</label>
+                      <StyleFields value={limitNumberToNDigits(cropperData.width, 3)} />
+                    </div>
+                    <div className='mb-2  col-lg-12 col-sm-6'>
+                      <label htmlFor="">Position-X</label>
+                      <StyleFields value={limitNumberToNDigits(cropperData.x, 3)} />
+                    </div>
+                    <div className='mb-2  col-lg-12 col-sm-6'>
+                      <label htmlFor="">Position-Y</label>
+                      <StyleFields value={limitNumberToNDigits(cropperData.y, 3)} />
+                    </div>
                   </div>
-                  <div className='mb-2'>
-                    <label htmlFor="">Width</label>
-                    <StyleFields value={limitNumberToNDigits(cropperData.width, 3)} />
-                  </div>
-                  <div className='mb-2'>
-                    <label htmlFor="">Position-X</label>
-                    <StyleFields value={limitNumberToNDigits(cropperData.x, 3)} />
-                  </div>
-                  <div className='mb-2'>
-                    <label htmlFor="">Position-Y</label>
-                    <StyleFields value={limitNumberToNDigits(cropperData.y, 3)} />
-                  </div>
+
                 </div>
               </Col>
             </Row>
@@ -184,40 +191,43 @@ const PerformConversions = () => {
                       alt="cropped"
                     />
                   )}
+                  <Button class={'show-btn'} data={'Render Image'} onClick={handleShow}></Button>
                 </div>
 
               </Col>
               <Col className='border-line' lg={3}>
                 <div className='p-5'>
                   <h2>Image Resizing</h2>
-                  <div className='mb-2'>
-                    <label htmlFor="">Height</label>
-                    <div className='d-flex align-items-center position-relative'>
-                      <input type="number" className='input-style' placeholder="0" value={targetHeight} onChange={(e) => {
-                        setTargetHeight(e.target.value)
-                        onCropChange();
-                      }
-                      } /><span className='pixel-lable'>px</span>
+                  <div className="row">
+                    <div className='mb-2 col-lg-12 col-sm-6'>
+                      <label htmlFor="">Height</label>
+                      <div className='d-flex align-items-center position-relative'>
+                        <input type="number" className='input-style' placeholder="0" value={targetHeight} onChange={(e) => {
+                          setTargetHeight(e.target.value)
+                          onCropChange();
+                        }
+                        } /><span className='pixel-lable'>px</span>
+                      </div>
+                    </div>
+                    <div className='mb-2 col-lg-12 col-sm-6'>
+                      <label htmlFor="">Width</label>
+                      <div className='d-flex align-items-center position-relative'>
+                        <input type="number" className='input-style' placeholder="0" value={targetWidth} onChange={(e) => {
+                          setTargetWidth(e.target.value)
+                          onCropChange();
+                        }
+                        } /><span className='pixel-lable'>px</span>
+                      </div>
+                    </div>
+                    <div className='mb-3 col-lg-12 col-sm-6'>
+                      <label htmlFor="">Resolution</label>
+                      <div className='d-flex align-items-center position-relative'>
+                        <span className='input-style'> {resolution.x !== null ? resolution.x.toFixed(2) : "00"} x{" "}
+                          {resolution.y !== null ? resolution.y.toFixed(2) : "00"}</span><span className='pixel-lable'>px</span>
+                      </div>
                     </div>
                   </div>
-                  <div className='mb-2'>
-                    <label htmlFor="">Width</label>
-                    <div className='d-flex align-items-center position-relative'>
-                      <input type="number" className='input-style' placeholder="0" value={targetWidth} onChange={(e) => {
-                        setTargetWidth(e.target.value)
-                        onCropChange();
-                      }
-                      } /><span className='pixel-lable'>px</span>
-                    </div>
-                  </div>
-                  <div className='mb-3'>
-                    <label htmlFor="">Resolution</label>
-                    <div className='d-flex align-items-center position-relative'>
-                      <span className='input-style'> {resolution.x !== null ? resolution.x.toFixed(2) : "00"} x{" "}
-                        {resolution.y !== null ? resolution.y.toFixed(2) : "00"}</span><span className='pixel-lable'>px</span>
-                    </div>
 
-                  </div>
                 </div>
               </Col>
             </Row>
@@ -232,21 +242,14 @@ const PerformConversions = () => {
                     alt="cropped"
                   />
                 )}
+                <Button class={'show-btn'} data={'Render Image'} onClick={handleShow}></Button>
               </Col>
-              <Col className='border-line' lg={3}>
+              <Col className='border-line convert-style' lg={3}>
                 <div className='p-5'>
-
-                  <button  onClick={handleShow}> Render image</button>
                   <h5>Type Conversion</h5>
-                  <p className="mb-0">Convert Imgae to:</p>
-                  <div className="position-relative">
-                    {/* <span className="pixel-lable hight"></span> */}
-                    <select className="custom-select" onChange={(e) => setImageFormat(e.target.value)} value={imageFormat}>
-                      <option value="png">PNG</option>
-                      <option value="jpg">JPG</option>
-                      <option value="svg">svg</option>
-                      <option value="webp">webp</option>
-                    </select>
+                  <p className="mb-1">Convert Imgae to:</p>
+                  <div className="position-relative col-sm-6 col-sx-12 col-lg-12">
+                    <SelectMenu onChange={(e) => setImageFormat(e.target.value)} value={imageFormat} />
                   </div>
                 </div>
               </Col>
@@ -260,18 +263,19 @@ const PerformConversions = () => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <img className="img-fluid max-hight" src={cropData} alt="" />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button onClick={handleDownload} variant="primary">Download</Button>
-        </Modal.Footer>
+        <div className="position-relative">
+          <Modal.Body className="p-5">
+            <h6 className="font-h6">Download Rendered Image:</h6>
+            <div className="model-card">
+              <img className="img-fluid max-hight position-relative" src={cropData} alt="" />
+              <Button class={'overlay-btn'} data={'preview'}></Button>
+              <Button class={'btn-model my-3'} data={'Download'} icon={<RiDownloadCloudLine className="fs-5" />} onClick={handleDownload}></Button>
+            </div>
+
+          </Modal.Body>
+          <span onClick={handleClose} className="model-back cursor">{svgIcon.modelclose} </span>
+        </div>
+
       </Modal>
     </>
   )
