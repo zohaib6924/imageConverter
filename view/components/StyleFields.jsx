@@ -7,7 +7,8 @@ const StyleFields = () => {
             <TextField id="outlined-basic" type="number" className='text-number' placeholder='0' inputProps={{
                 sx: {
                     paddingBlock: "9px",
-                    paddingRight: "45px"
+                    paddingRight: "45px",
+                     
                 }
             }} variant="outlined" /> <span className='pix-lable'>px</span>
 
