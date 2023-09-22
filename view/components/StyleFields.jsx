@@ -6,7 +6,8 @@ const StyleFields = () => {
         <div className='d-flex align-items-center position-relative'>
             <TextField id="outlined-basic" type="number" className='text-number' placeholder='0' inputProps={{
                 sx: {
-                    paddingBlock: "9px"
+                    paddingBlock: "9px",
+                    paddingRight: "45px"
                 }
             }} variant="outlined" /> <span className='pix-lable'>px</span>
 
