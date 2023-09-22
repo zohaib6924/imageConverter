@@ -1,16 +1,40 @@
-import React from 'react'
-import { BiSolidChevronDown } from 'react-icons/bi'
-const SelectMenu = (props) => {
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+const SelectMenu = () => {
+    const [value, setvalue] = useState('png');
+
+    const handlechange = (e) => {
+        setvalue(e.target.value)
+    }
+
     return (
-        <div className='position-relative'>
-            <select className='text-fields cursor' value={props.value} onChange={props.onChange}>
-                <option value="png">PNG</option>
-                <option value="jpg">JPG</option>
-                <option value="webp">webp</option>
-            </select>
-            <span className='pix-lable'><BiSolidChevronDown /></span>
-        </div>
+        <Box>
+            <FormControl
+                fullWidth>
+                <Select
+                    
+                    labelId="demo-simple-select-label"
+                 
+                    id="demo-simple-select"
+                    className='select-text-field'
+                    value={value}
+                    onChange={handlechange}>
+
+                    <MenuItem value="png">PNG</MenuItem>
+                    <MenuItem value="jpg">JPG</MenuItem>
+                    <MenuItem value="webp">webp</MenuItem>
+                </Select>
+            </FormControl>
+
+        </Box>
     )
 }
 
 export default SelectMenu
+
+
+

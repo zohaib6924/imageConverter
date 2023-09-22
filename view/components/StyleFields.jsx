@@ -1,9 +1,15 @@
+import { TextField } from '@mui/material'
 import React from 'react'
 
-const StyleFields = (props) => {
+const StyleFields = () => {
     return (
         <div className='d-flex align-items-center position-relative'>
-            <input type="number" min="1" className='text-fields' placeholder='0' value={props.value} onChange={props.onChange} /> <span className='pix-lable'>px</span>
+            <TextField id="outlined-basic" type="number" className='text-number' placeholder='0' inputProps={{
+                sx: {
+                    paddingBlock: "9px"
+                }
+            }} variant="outlined" /> <span className='pix-lable'>px</span>
+
         </div>
     )
 }
